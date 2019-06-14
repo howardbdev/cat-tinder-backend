@@ -15,12 +15,13 @@ class CatsController < ApplicationController
 
   # POST /cats
   def create
+    #byebug
     @cat = Cat.new(cat_params)
 
     if @cat.save
-      render json: @cat, status: :created, location: @cat
+      render json: @cat, status: :created, location: @cat, status: :ok
     else
-      render json: @cat.errors, status: :unprocessable_entity
+      render json: {error: "name #{@cat.errors[:name].first}"}, status: :unprocessable_entity
     end
   end
 
